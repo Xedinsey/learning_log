@@ -1,0 +1,21 @@
+{% extends "learning_logs/base.html" %}
+
+{% load bootstrap4 %}
+{% block page_header %}
+  <p><a href="{% url 'learning_logs:topic' topic.id %}" class="btn btn-primary">Назад</a></p>
+{% endblock page_header %}
+
+{% block content %}
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="align-self-center">
+        <form method="post" action="{% url 'learning_logs:new_entry' topic.id %}" class="form">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+          <button name="submit" class="btn btn-primary">Добавить</button>
+          <input type="hidden" name="next" value="{% url 'learning_logs:index' %}"/>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
