@@ -133,3 +133,9 @@ LOGIN_URL = '/users/login'
 
 import django_heroku
 django_heroku.settings(locals())
+
+if os.envirgon.get('DEBUG') == 'TRUE':
+    DEBUG = True
+elif os.envirgon.get('DEBUG') == 'FALSE':
+    DEBUG = False
+    
