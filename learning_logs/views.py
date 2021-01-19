@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.http import HttpResponseNotFound
 
 from .models import Topic, Entry
-from .forms import TopicForm, EntryForm
+from .forms import TopicForm, EntryForm, EditForm
 from django.http import Http404
 
 # Здесь представлены представления
@@ -94,10 +94,10 @@ def edit_entry(request, entry_id):
 
     if request.method != 'POST':
         #Исходный запрос; форма заполняется данными текущей запсиси.
-        form = EntryForm(instance=entry)
+        form = EditForm(instance=entry)
     else:
         #отправка данных POST; обработать данные.
-        form = EntryForm(instance=entry, data=request.POST)
+        form = EditForm(instance=entry, data=request.POST)
         if form.is_valid():
             form.save()
             return redirect('learning_logs:topic', topic_id=topic.id)

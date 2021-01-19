@@ -1,20 +1,23 @@
 {% extends "learning_logs/base.html" %}
-
+{% load bootstrap4 %}
 
 {% block content %}
     <h1>Темы</h1>
-    <ul>
+    <a class="btn btn-primary" href="{% url 'learning_logs:new_topic' %}">Добавить новую тему</a>
+    <br>
+    <br>
+    <div class="list-group">
       {% for topic in topics %}
-        <li>
-          <a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a> |
-          <a href="{% url 'learning_logs:delete_topic' topic.id %}">Удалить</a>
-        </li>
+      <div class="">
+        <a class="list-group-item list-group-item-action" href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
+        <div class="">
+          <a href="{% url 'learning_logs:delete_topic' topic.id %}" class="btn btn-outline-danger">Удалить</a>
+        </div>
+      </div>
+      <br>
       {% empty %}
         <li>Пока не создано ни одной темы</li>
       {% endfor %}
-    </ul>
-    <a href="{% url 'learning_logs:new_topic' %}">Добавить новую тему</a>
-
-
+    </div>
 
 {% endblock %}
