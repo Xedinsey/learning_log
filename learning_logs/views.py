@@ -96,7 +96,7 @@ def edit_entry(request, entry_id):
     topic = entry.topic
 
     # Проверка того, что тема принадлежит текущему пользователю
-    check_entry_owner(entry, request)
+    
 
     if request.method != 'POST':
         #Исходный запрос; форма заполняется данными текущей запсиси.
@@ -114,10 +114,11 @@ def edit_entry(request, entry_id):
 
 def delete_topic(request, topic_id):
     """удаляет тему"""
-    check_topic_owner(topic, request)
+
     try:
         topic = Topic.objects.get(id=topic_id)
         context = {'topic': topic}
+
         topic.delete()
         return HttpResponseRedirect("/topics")
     except Topic.DoesNotExist:
@@ -126,11 +127,12 @@ def delete_topic(request, topic_id):
 
 def delete_entry(request, entry_id):
     """удаляет запись"""
-    check_entry_owner(entry, request)
+
     try:
         entry = Entry.objects.get(id=entry_id)
         topic = entry.topic
         context = {'entry': entry}
+
         entry.delete()
         return redirect('learning_logs:topic', topic_id=topic.id)
     except Topic.DoesNotExist:
