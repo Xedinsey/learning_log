@@ -7,17 +7,20 @@
     <br>
     <br>
     <div class="list-group">
-      {% for topic in topics %}
-      <div class="">
-        <a class="list-group-item list-group-item-action" href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
-        <div class="">
-          <a href="{% url 'learning_logs:delete_topic' topic.id %}" class="btn btn-outline-danger">Удалить</a>
+      <div class="container">
+        {% for topic in topics %}
+        <div class="row">
+          <div class="col">
+            <a class="list-group-item list-group-item-action" href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
+          </div>
+          <div class="col">
+            <a href="{% url 'learning_logs:delete_topic' topic.id %}" class="btn btn-outline-danger">Удалить</a>
+          </div>
         </div>
-      </div>
-      <br>
-      {% empty %}
+        <br>
+        {% empty %}
         <li>Пока не создано ни одной темы</li>
-      {% endfor %}
+        {% endfor %}
     </div>
 
 {% endblock %}

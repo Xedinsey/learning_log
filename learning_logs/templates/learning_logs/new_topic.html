@@ -1,6 +1,8 @@
 {% extends "learning_logs/base.html" %}
 {% load bootstrap4 %}
 {% block content %}
+<a class="btn btn-primary" href="{% url 'learning_logs:topics' %}">Назад</a>
+<br><br><br>
 <h3>Создайте тему:</h3>
 <form class="col-5" action="{% url 'learning_logs:new_topic' %}" method='POST'>
   {% csrf_token %}
