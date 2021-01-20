@@ -71,6 +71,7 @@ def new_topic(request):
 def new_entry(request, topic_id):
     """добавляет новую запись по конкретной теме"""
     topic = Topic.objects.get(id=topic_id)
+    check_topic_owner(topic, request)
     if request.method != 'POST':
         #данные не отправлялиссь, создается пустая форма
         form = EntryForm()
