@@ -16,6 +16,7 @@ class Entry(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
     text = models.TextField(max_length=10000)
     date_added = models.DateTimeField(auto_now_add=True)
+    # owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = 'Запись'

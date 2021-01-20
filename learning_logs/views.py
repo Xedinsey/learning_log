@@ -94,10 +94,9 @@ def edit_entry(request, entry_id):
     """редактирует существующую запись"""
     entry = Entry.objects.get(id=entry_id)
     topic = entry.topic
-
     # Проверка того, что тема принадлежит текущему пользователю
-    
-
+    check_topic_owner(topic, request)
+    # check_entry_owner(entry, request)
     if request.method != 'POST':
         #Исходный запрос; форма заполняется данными текущей запсиси.
         form = EditForm(instance=entry)
@@ -114,26 +113,26 @@ def edit_entry(request, entry_id):
 
 def delete_topic(request, topic_id):
     """удаляет тему"""
-
     try:
         topic = Topic.objects.get(id=topic_id)
         context = {'topic': topic}
-
+        check_topic_owner(topic, request)
         topic.delete()
         return HttpResponseRedirect("/topics")
+
     except Topic.DoesNotExist:
         return HttpResponseNotFound("<h2>Тема не найдена</h2>")
 
 
 def delete_entry(request, entry_id):
     """удаляет запись"""
-
     try:
         entry = Entry.objects.get(id=entry_id)
         topic = entry.topic
         context = {'entry': entry}
-
+        check_topic_owner(topic, request)
         entry.delete()
         return redirect('learning_logs:topic', topic_id=topic.id)
+
     except Topic.DoesNotExist:
         return HttpResponseNotFound("<h2>Запись не найдена</h2>")
